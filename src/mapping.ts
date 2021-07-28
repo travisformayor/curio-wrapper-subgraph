@@ -27,13 +27,13 @@ function updateUserCardBalance(
   contractLookup: WrapperContract
 ) {
     // Load or Create user record
-    let user = CurioUser.load(eventUser.toHex());
+    let user:CurioUser = CurioUser.load(eventUser.toHex());
     if (!user) user = new CurioUser(eventUser.toHex());
     // to do: a .save()
     
     // Load or Create record of users balance for the card involved in the event
-    const userCardId = `${eventUser.toHex()}-${eventCardId.toString()}`;
-    let userCardBalance = CardBalance.load(userCardId);
+    const userCardId:string = `${eventUser.toHex()}-${eventCardId.toString()}`;
+    let userCardBalance:CardBalance = CardBalance.load(userCardId);
     if (!userCardBalance) userCardBalance = new CardBalance(userCardId)
 
     // Update user balance for card involved in event
@@ -58,14 +58,14 @@ export function handleTransferSingle(event: TransferSingleEvent): void {
   const burnAddr:string = "0x0000000000000000000000000000000000000000";
   const contractAddr:string = "0x73DA73EF3a6982109c4d5BDb0dB9dd3E3783f313";
 
-  const eventOperator = event.params._operator; // addr that executed transfer
-  const eventFrom = event.params._from;
-  const eventTo = event.params._to;
-  const eventCard = event.params._id;
-  // const eventQuantity = event.params._value;
+  const eventOperator:Address = event.params._operator; // addr that executed transfer
+  const eventFrom:Address = event.params._from;
+  const eventTo:Address = event.params._to;
+  const eventCard:BigInt = event.params._id;
+  // const eventQuantity:BigInt = event.params._value;
   
   // Wrapper Contract object to access public state
-  const contractLookup = WrapperContract.bind(event.address);
+  const contractLookup:WrapperContract = WrapperContract.bind(event.address);
 
   if (eventOperator.toHex() == eventTo.toHex() && eventFrom.toHex() == burnAddr ) {
     // Wrap Event
