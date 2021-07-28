@@ -1,6 +1,6 @@
 type CardBalance @entity {
   "Balance info on a specific card"
-  id: ID!
+  id: ID! # User addres + "-" + card id (1-30)
   cardNumber: BigInt! # uint256
   balance: BigInt! # uint256
 }
@@ -12,7 +12,7 @@ type SetBalance @entity {
   balance: BigInt! # uint256
 }
 
-type CurioCollector @entity {
+type CurioUser @entity {
   "Top level info about a specific Curio Card collector"
   id: ID! # The eth address of the user
   cards: [CardBalance!]! # Array of all their cards with balances
