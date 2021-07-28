@@ -1,36 +1,25 @@
-type OwnershipTransferred @entity {
+type CardBalance @entity {
+  "Balance info on a specific card"
   id: ID!
-  previousOwner: Bytes! # address
-  newOwner: Bytes! # address
+  cardNumber: BigInt! # uint256
+  balance: BigInt! # uint256
 }
 
-type TransferSingle @entity {
+type SetBalance @entity {
+  "Balance info on a specific Set of cards"
   id: ID!
-  _operator: Bytes! # address
-  _from: Bytes! # address
-  _to: Bytes! # address
-  _id: BigInt! # uint256
-  _value: BigInt! # uint256
+  setName: String!
+  balance: BigInt! # uint256
 }
 
-type TransferBatch @entity {
-  id: ID!
-  _operator: Bytes! # address
-  _from: Bytes! # address
-  _to: Bytes! # address
-  _ids: [BigInt]! # uint256[]
-  _values: [BigInt]! # uint256[]
-}
+type CurioCollector @entity {
+  "Top level info about a specific Curio Card collector"
+  id: ID! # The eth address of the user
+  cards: [CardBalance!]! # Array of all their cards with balances
+  sets: [SetBalance!]! # Array of all their sets with balances
 
-type ApprovalForAll @entity {
-  id: ID!
-  _owner: Bytes! # address
-  _operator: Bytes! # address
-  _approved: Boolean! # bool
-}
-
-type URI @entity {
-  id: ID!
-  _value: String! # string
-  _id: BigInt! # uint256
+  "uniqueCards is the number of different card series they have"
+  "example: if they have some CRO1, CRO2, and CRO25, they have 3 uniqueCards. Max is 30" 
+  "usage: Useful info for tracking their progress towards a full set"
+  uniqueCards: Int! 
 }
