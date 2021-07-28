@@ -18,8 +18,6 @@ type CurioUser @entity {
   cards: [CardBalance!]! # Array of all their cards with balances
   sets: [SetBalance!]! # Array of all their sets with balances
 
-  "uniqueCards is the number of different card series they have"
-  "example: if they have some CRO1, CRO2, and CRO25, they have 3 uniqueCards. Max is 30" 
-  "usage: Useful info for tracking their progress towards a full set"
+  "uniqueCards is # of diff cards help. example: holding CRO1, CRO2, and CRO25 = 3 uniqueCards" 
   uniqueCards: Int! 
 }
