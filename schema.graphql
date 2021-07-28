@@ -1,0 +1,36 @@
+type OwnershipTransferred @entity {
+  id: ID!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+}
+
+type TransferSingle @entity {
+  id: ID!
+  _operator: Bytes! # address
+  _from: Bytes! # address
+  _to: Bytes! # address
+  _id: BigInt! # uint256
+  _value: BigInt! # uint256
+}
+
+type TransferBatch @entity {
+  id: ID!
+  _operator: Bytes! # address
+  _from: Bytes! # address
+  _to: Bytes! # address
+  _ids: [BigInt]! # uint256[]
+  _values: [BigInt]! # uint256[]
+}
+
+type ApprovalForAll @entity {
+  id: ID!
+  _owner: Bytes! # address
+  _operator: Bytes! # address
+  _approved: Boolean! # bool
+}
+
+type URI @entity {
+  id: ID!
+  _value: String! # string
+  _id: BigInt! # uint256
+}
